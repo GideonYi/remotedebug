@@ -1,0 +1,17 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: RemoteDebug
+Bundle-SymbolicName: remotedebug-eclipse-plugin;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Bundle-Activator: com.gideon.remotedebug.Activator
+Bundle-Vendor: Gideon.Yi
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime,
+ org.eclipse.jdt.ui;bundle-version="3.9.2",
+ org.eclipse.jdt.core;bundle-version="3.9.2",
+ org.eclipse.core.resources;bundle-version="3.8.101",
+ org.apache.httpcomponents.httpclient;bundle-version="4.1.3",
+ org.apache.httpcomponents.httpcore;bundle-version="4.1.4",
+ org.eclipse.ui.console;bundle-version="3.5.200"
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7
+Bundle-ActivationPolicy: lazy
