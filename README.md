@@ -3,7 +3,8 @@ This is a tool for developer to debug remote system in anytime without breakpoin
 This introduction will explain how it works, and the key points. So you can extend it in your own situation.
 #how to use it
 ##use it with packages
-This is the easier way to use this plugin. You only need few steps to make it run.
+This is the easier way to use this plugin. You only need few steps to make it run:
+
 1. Copy the jar file remotedebug-eclipse-plugin_1.0.0.201612211345.jar into eclipse folder eclipse_home/dropins,the restart it. (I develop this plugin in eclipse kepler, so it only supports eclipse version equals or higher than kepler)
 2. You should see a new preference item with name RemoteDebug in the eclipse Preferences view.
 3. You will see four options, a checkbox to switch whether use the class path in the second file field. The second checkbox is used for whether show the debug messages, such as the class path you send to the server. The last text field is the URL to accept the class bytes. You can copy the debug.jsp file in the folder packages to %WEB_APP_ROOT%/WebContent/debug.jsp, then you can set the URL to http://%HOSTNAME%:%PORT%/%WEB_APP_NAME%/debug.jsp.
