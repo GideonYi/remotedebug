@@ -18,18 +18,7 @@ public class JavaClassExecuter {
      * @return 执行结果
      */
     public static String execute(byte[] classByte) {
-        HackSystem.clearBuffer();
-        ClassModifier cm = new ClassModifier(classByte);
-        byte[] modiBytes = cm.modifyUTF8Constant("java/lang/System", "com/gideon/remotedebug/HackSystem");
-        HotSwapClassLoader loader = new HotSwapClassLoader();
-        Class clazz = loader.loadByte(modiBytes);
-        try {
-            Method method = clazz.getMethod("main", new Class[] { String[].class });
-            method.invoke(null, new String[] { null });
-        } catch (Throwable e) {
-            e.printStackTrace(HackSystem.out);
-        }
-        return HackSystem.getBufferString();
+        return execute(classByte, null);
     }
     
     /**
@@ -44,7 +33,12 @@ public class JavaClassExecuter {
         HackSystem.clearBuffer();
         ClassModifier cm = new ClassModifier(classByte);
         byte[] modiBytes = cm.modifyUTF8Constant("java/lang/System", "com/gideon/remotedebug/HackSystem");
-        HotSwapClassLoader loader = new HotSwapClassLoader(parent);
+        HotSwapClassLoader loader;
+        if (parent == null) {
+            loader = new HotSwapClassLoader();
+        }else {
+            loader = new HotSwapClassLoader(parent);
+        }
         Class clazz = loader.loadByte(modiBytes);
         try {
             Method method = clazz.getMethod("main", new Class[] { String[].class });
