@@ -13,7 +13,7 @@
           <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <text value="服务器url："/>
+          <text value="server url："/>
         </properties>
       </component>
       <component id="65537" class="javax.swing.JTextField" binding="debugServerUrl">
@@ -26,11 +26,11 @@
       </component>
       <component id="d1e9d" class="javax.swing.JCheckBox" binding="isDebug">
         <constraints>
-          <grid row="2" column="1" row-span="2" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <selected value="true"/>
-          <text value="CheckBox"/>
+          <text value=""/>
         </properties>
       </component>
       <component id="8ae27" class="javax.swing.JLabel">
@@ -38,7 +38,7 @@
           <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <text value="显示信息："/>
+          <text value="debug info："/>
         </properties>
       </component>
       <component id="9b6fb" class="javax.swing.JLabel">
@@ -46,7 +46,7 @@
           <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <text value=" 类路径： "/>
+          <text value="classpath： "/>
         </properties>
       </component>
       <component id="7aba2" class="javax.swing.JTextField" binding="classPath">
@@ -56,6 +56,22 @@
           </grid>
         </constraints>
         <properties/>
+      </component>
+      <component id="60278" class="javax.swing.JCheckBox" binding="isTest">
+        <constraints>
+          <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value=""/>
+        </properties>
+      </component>
+      <component id="42488" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="is test："/>
+        </properties>
       </component>
     </children>
   </grid>

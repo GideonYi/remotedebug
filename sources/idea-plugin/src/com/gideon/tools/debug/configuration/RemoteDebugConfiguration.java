@@ -27,6 +27,7 @@ public class RemoteDebugConfiguration extends RunConfigurationBase {
     public String serverUrl = "http://localhost:8088/emirror/debug";
     public String classPath = "cn.caijiajia.emirror.DebugMain";
     public boolean isDebug = true;
+    public boolean isTest = false;
 
     protected RemoteDebugConfiguration(Project project, ConfigurationFactory factory, String name) {
         super(project, factory, name);
@@ -80,5 +81,13 @@ public class RemoteDebugConfiguration extends RunConfigurationBase {
 
     public void setClassPath(String classPath) {
         this.classPath = classPath;
+    }
+
+    public boolean isTest() {
+        return isTest;
+    }
+
+    public void setTest(boolean test) {
+        isTest = test;
     }
 }

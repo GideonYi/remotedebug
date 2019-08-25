@@ -22,9 +22,9 @@ public class ToolWindowUtil {
 
     private static ToolWindowUtil instance = new ToolWindowUtil();
 
-    private ToolWindow toolWindow;
+    private Map<Project, ToolWindow> toolWindowMap = new HashMap<>();
 
-    private Map<String, ConsoleView> viewMap = new HashMap<>();
+    private Map<Project, Map<String, ConsoleView>> consoleViewMap = new HashMap<>();
 
     private static final String REMOTE_DEBUG_WINDOW = "RemoteDebug";
 
@@ -36,32 +36,42 @@ public class ToolWindowUtil {
     }
 
     public ConsoleView showConsoleToolWindow(final Project project, String displayName) {
+        Map<String, ConsoleView> map = consoleViewMap.get(project);
+        if (map == null) {
+            map = new HashMap<>();
+            consoleViewMap.put(project, map);
+        }
+        ConsoleView view = map.get(displayName);
+        if (view != null) {
+            return view;
+        }
+        ToolWindow toolWindow = toolWindowMap.get(project);
         if (toolWindow == null) {
-            createNewToolWindow(project, REMOTE_DEBUG_WINDOW);
+            toolWindow = createNewToolWindow(project, REMOTE_DEBUG_WINDOW);
+            toolWindowMap.put(project, toolWindow);
         }
         Content content = toolWindow.getContentManager().findContent(displayName);
         if (content == null) {
-            ConsoleViewImpl consoleView = new ConsoleViewImpl(project, false);
+            ConsoleView consoleView = new ConsoleViewImpl(project, false);
             content = createConsoleContent(consoleView, displayName);
             toolWindow.getContentManager().addContent(content);
             toolWindow.getContentManager().setSelectedContent(content);
-            viewMap.put(displayName, consoleView);
+            map.put(displayName, consoleView);
         }
         toolWindow.getContentManager().setSelectedContent(content);
-        return viewMap.get(displayName);
+        return map.get(displayName);
     }
 
-    private void createNewToolWindow(final Project project, String title) {
+    private ToolWindow createNewToolWindow(final Project project, String title) {
         ToolWindow toolWindow = ToolWindowManager.getInstance(project).getToolWindow(title);
         if (toolWindow == null) {
-            this.toolWindow = ToolWindowManager.getInstance(project).registerToolWindow(
+            toolWindow = ToolWindowManager.getInstance(project).registerToolWindow(
                     title,
                     true,
                     ToolWindowAnchor.BOTTOM
             );
-        } else {
-            this.toolWindow = toolWindow;
         }
+        return toolWindow;
     }
 
     private Content createConsoleContent(final ConsoleView console, final String title) {

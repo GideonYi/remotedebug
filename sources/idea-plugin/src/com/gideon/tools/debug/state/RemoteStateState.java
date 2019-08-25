@@ -47,7 +47,7 @@ public class RemoteStateState implements RunProfileState {
 
         String serverUrl = configuration.getServerUrl();
         String classPath = configuration.getClassPath();
-        boolean debug = configuration.isDebug();
+        boolean isDebug = configuration.isDebug();
         JavaPsiFacade facade = JavaPsiFacade.getInstance(myProject);
         PsiClass aClass = facade.findClass(classPath, GlobalSearchScope.projectScope(myProject));
         if (aClass == null) {
@@ -56,7 +56,8 @@ public class RemoteStateState implements RunProfileState {
             return null;
         }
         Module module = ModuleUtil.findModuleForPsiElement(aClass);
-        String moduleOutputPath = CompilerPaths.getModuleOutputPath(module, false);
+
+        String moduleOutputPath = CompilerPaths.getModuleOutputPath(module, configuration.isTest());
         String filePath = classPath.replace(".", "/");
         String classFilePath = String.format("%s/%s.class", moduleOutputPath, filePath);
         File file = FileUtils.getFile(classFilePath);
@@ -65,8 +66,10 @@ public class RemoteStateState implements RunProfileState {
             Messages.showMessageDialog(myProject, msg, "Error Message", Messages.getInformationIcon());
         }
         ConsoleView consoleView = toolWindowUtil.showConsoleToolWindow(myProject, configuration.getName());
-        String debugMsg = String.format("server url:%s\nclass path: %s\nclass file path: %s\n", serverUrl, classPath, classFilePath);
-        consoleView.print(debugMsg, ConsoleViewContentType.SYSTEM_OUTPUT);
+        if (isDebug) {
+            String debugMsg = String.format("server url:%s\nclass path: %s\nclass file path: %s\n", serverUrl, classPath, classFilePath);
+            consoleView.print(debugMsg, ConsoleViewContentType.SYSTEM_OUTPUT);
+        }
         consoleView.print("=========== remote output ===========\n", ConsoleViewContentType.SYSTEM_OUTPUT);
 
         InputStream is = null;

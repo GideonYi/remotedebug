@@ -1,6 +1,5 @@
 package com.gideon.tools.debug.configuration;
 
-import com.intellij.openapi.options.ConfigurationException;
 import com.intellij.openapi.options.SettingsEditor;
 import com.intellij.openapi.ui.ComponentWithBrowseButton;
 import com.intellij.openapi.ui.LabeledComponent;
@@ -19,8 +18,9 @@ import javax.swing.*;
 public class RemoteDebugSettingsEditor extends SettingsEditor<RemoteDebugConfiguration> {
     private JPanel myPanel;
     private JTextField debugServerUrl;
-    private JCheckBox isDebug;
     private JTextField classPath;
+    private JCheckBox isDebug;
+    private JCheckBox isTest;
     private LabeledComponent<ComponentWithBrowseButton> myMainClass;
 
     @Override
@@ -31,10 +31,11 @@ public class RemoteDebugSettingsEditor extends SettingsEditor<RemoteDebugConfigu
     }
 
     @Override
-    protected void applyEditorTo(RemoteDebugConfiguration configuration) throws ConfigurationException {
+    protected void applyEditorTo(RemoteDebugConfiguration configuration) {
         configuration.serverUrl = debugServerUrl.getText();
-        configuration.isDebug = isDebug.isSelected();
         configuration.classPath = classPath.getText();
+        configuration.isDebug = isDebug.isSelected();
+        configuration.isTest = isTest.isSelected();
     }
 
     @NotNull
@@ -44,7 +45,7 @@ public class RemoteDebugSettingsEditor extends SettingsEditor<RemoteDebugConfigu
     }
 
     private void createUIComponents() {
-        myMainClass = new LabeledComponent<ComponentWithBrowseButton>();
+        myMainClass = new LabeledComponent<>();
         myMainClass.setComponent(new TextFieldWithBrowseButton());
     }
 }
