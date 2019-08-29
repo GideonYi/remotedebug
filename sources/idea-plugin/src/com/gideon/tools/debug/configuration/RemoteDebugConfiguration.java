@@ -24,8 +24,8 @@ import org.jetbrains.annotations.Nullable;
 
 public class RemoteDebugConfiguration extends RunConfigurationBase {
 
-    public String serverUrl = "http://localhost:8088/emirror/debug";
-    public String classPath = "cn.caijiajia.emirror.DebugMain";
+    public String serverUrl = "http://localhost:8088/demo/debug";
+    public String classPath = "com.gideon.tools.debug.DebugMain";
     public boolean isDebug = true;
     public boolean isTest = false;
 
